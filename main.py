@@ -3,15 +3,12 @@ alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'
 def caesar(texter, shifter, directioner):
     caesar_text = ""
     new_alphabet = []
-    counter = shifter
-    while counter > 25:
-        counter -= 26
     for i in alphabet:
-        new_alphabet += alphabet[counter]
-        if counter == 25:
-            counter -= 25 
+        new_alphabet += alphabet[shifter]
+        if shifter == 25:
+            shifter -= 25 
         else:
-            counter += 1
+            shifter += 1
     for x in texter:
         if directioner == "encode":
             if x in alphabet:
@@ -29,6 +26,7 @@ def caesar(texter, shifter, directioner):
 
 from art import logo
 print(logo)
+
 program = True
 while program:
     direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
@@ -37,6 +35,7 @@ while program:
         direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
     text = input("Type your message:\n").lower()
     shift = int(input("Type the shift number:\n"))
+    shift %= 26
     caesar(texter=text, shifter=shift, directioner=direction)
     restart = input("Type 'yes' if you want to go again. Otherwise type 'no'.\n")
     if restart == "no":
